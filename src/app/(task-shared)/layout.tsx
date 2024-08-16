@@ -11,11 +11,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* Ditambahkan */}
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </head>
 
+      {/* Ditambahkan */}
       <body className={`flex ${inter.className}`}>
         <SideMenu />
         {children}
