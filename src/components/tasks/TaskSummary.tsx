@@ -22,7 +22,7 @@ const TaskSummary = (): JSX.Element => {
       <div className="text-white bg-green-500 flex items-center justify-center mb-10 p-4 gap-x-2">
         <span className="material-icons">list</span>
         <h2>
-          You still have {uncompletedTasks.length} {uncompletedTasks.length <= 1 ? 'task' : 'tasks'}
+          You still have {uncompletedTasks.length} {uncompletedTasks.length <= 1 ? 'task' : 'tasks'}{' '}
           left
         </h2>
       </div>
