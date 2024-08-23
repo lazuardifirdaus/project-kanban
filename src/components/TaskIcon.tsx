@@ -1,4 +1,4 @@
-import { useRecoilState } from 'recoil'
+import { useTasksAction } from '@/hooks/useTasksAction'
 import { tasksState } from '@/features/taskAtoms'
 import { TASK_PROGRESS_ID } from '@/constants'
 import { Task } from '@/types'
@@ -8,16 +8,8 @@ interface TaskIconProps {
 }
 
 const TaskIcon = ({ task }: TaskIconProps) => {
+  const { completeTask } = useTasksAction()
   const isProgressCompleted = task.progressOrder === TASK_PROGRESS_ID.COMPLETED
-
-  const [tasks, setTasks] = useRecoilState<Task[]>(tasksState)
-
-  const completeTask = (taskId: number): void => {
-    const updatedTasks: Task[] = tasks.map((task) =>
-      task.id === taskId ? { ...task, progressOrder: TASK_PROGRESS_ID.COMPLETED } : task,
-    )
-    setTasks(updatedTasks)
-  }
 
   return (
     <span
