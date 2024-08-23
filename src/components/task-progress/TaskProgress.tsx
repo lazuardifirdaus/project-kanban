@@ -19,6 +19,8 @@ const TaskProgress = (): JSX.Element => {
 
   const completedTasks: Task[] = useRecoilValue(completedTasksSelector)
 
+  
+
   return (
     <div className="w-full p-10">
       <h1 className="text-green-500 mb-16 font-bold text-3xl">Task Progress</h1>
