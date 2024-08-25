@@ -1,5 +1,5 @@
 import { useTasksAction } from '@/hooks/useTasksAction'
-import { TASK_PROGRESS_ID } from '@/constants'
+import { TASK_MODAL_TYPE, TASK_PROGRESS_ID } from '@/constants'
 import type { Task } from '@/types'
 import TaskIcon from '../TaskIcon'
 import { tasksState } from '@/features/taskAtoms'
@@ -11,7 +11,7 @@ interface TaskCardProps {
 const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
   const { moveTaskCard } = useTasksAction()
   const isStarted = task.progressOrder === TASK_PROGRESS_ID.NOT_STARTED
-
+  
   return (
     <div className="bg-green-200 p-6 rounded-xl my-2 flex flex-col gap-y-2 text-xl relative">
       <div className="flex justify-between">
