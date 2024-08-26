@@ -2,6 +2,8 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import { TASK_MODAL_TYPE, TASK_PROGRESS_ID, TASK_PROGRESS_STATUS } from '@/constants'
 import type { Task } from '@/types'
 import { useTasksAction } from '@/hooks/useTasksAction'
+import { useRecoilState } from 'recoil'
+import { tasksState } from '@/features/taskAtoms'
 
 interface TaskFormProps {
   type: string
@@ -10,15 +12,19 @@ interface TaskFormProps {
 }
 
 const TaskForm = ({ type, defaultProgressOrder, setIsModalOpen }: TaskFormProps): JSX.Element => {
+  const [tasks, setTasks] = useRecoilState<Task[]>(tasksState)
   const [title, setTitle] = useState<string>('')
   const [detail, setDetail] = useState<string>('')
   const [dueDate, setDueDate] = useState<string>('')
   const [progressOrder, setProgressOrder] = useState<number>(defaultProgressOrder)
-  const { addTask } = useTasksAction()
+  const { addTask, editTask } = useTasksAction()
 
   const handleSubmit = (): void => {
     if (type === TASK_MODAL_TYPE.ADD) {
       addTask(title, detail, dueDate, progressOrder)
+      setIsModalOpen(false)
+    } else if (type === TASK_MODAL_TYPE.EDIT) {
+      editTask(title, detail, dueDate, progressOrder) // terakhir diedit di sini, mau menambahkan properties
       setIsModalOpen(false)
     }
   }

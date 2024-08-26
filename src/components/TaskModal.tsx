@@ -1,6 +1,7 @@
 import React from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import TaskForm from './TaskForm'
+import { Task } from '@/types'
 
 type TaskModalProps = {
   headingTitle: string
