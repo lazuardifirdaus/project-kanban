@@ -39,7 +39,7 @@ export const useTasksAction = (): useTaskActionType => {
 
   const addTask = (title: string, detail: string, dueDate: string, progressOrder: number): void => {
     const newTask: Task = {
-      id: (tasks[tasks.length - 1].id || 0) + 1,
+      id: (tasks[tasks.length - 1]?.id || 0) + 1,
       title,
       detail,
       dueDate,
@@ -62,16 +62,15 @@ export const useTasksAction = (): useTaskActionType => {
   }
 
   const deleteTask = (taskId: number): void => {
-    console.log('Deleting task with ID:', taskId)
-    console.log('Tasks before deletion:', tasks)
+    // console.log('Deleting task with ID:', taskId)
+    // console.log('Tasks before deletion:', tasks)
     const removedTask = tasks.filter((task) => task.id !== taskId) // menghilangkan task dengan cara filter
-    console.log('Tasks after deletion:', removedTask)
+    // console.log('Tasks after deletion:', removedTask)
     setTasks(removedTask)
   }
 
-  // const filterTask = (taskId: number, progressOrder: number): void => {
-  //   const deletedTask = tasks.filter((task) => task.id !== taskId) // filter kategori task sesuai progressOrder
-  //   setTasks(deletedTask)
+  // const filterTask = (progressOrder: number): Task[] => {
+  //   return tasks.filter((task) => task.progressOrder === progressOrder)
   // }
 
   return {
