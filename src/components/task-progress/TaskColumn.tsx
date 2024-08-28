@@ -34,7 +34,7 @@ const TaskColumn = ({ columnTitle, tasks, columnId }: TaskColumnProps): JSX.Elem
       <div>
         {tasks.map((task: Task) => {
           // console.log(task)
-          return <TaskCard task={task} key={task.id} />
+          return <TaskCard task={task} key={task.id} defaultProgressOrder={task.progressOrder} />
         })}
       </div>
     </div>
