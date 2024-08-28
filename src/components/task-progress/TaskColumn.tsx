@@ -33,7 +33,8 @@ const TaskColumn = ({ columnTitle, tasks, columnId }: TaskColumnProps): JSX.Elem
       )}
       <div>
         {tasks.map((task: Task) => {
-          return <TaskCard key={task.id} task={task} />
+          // console.log(task)
+          return <TaskCard task={task} key={task.id} />
         })}
       </div>
     </div>

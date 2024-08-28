@@ -2,23 +2,35 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import { TASK_MODAL_TYPE, TASK_PROGRESS_ID, TASK_PROGRESS_STATUS } from '@/constants'
 import type { Task } from '@/types'
 import { useTasksAction } from '@/hooks/useTasksAction'
+import { useRecoilState } from 'recoil'
+import { tasksState } from '@/features/taskAtoms'
 
 interface TaskFormProps {
+  task?: Task
   type: string
   defaultProgressOrder: number
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const TaskForm = ({ type, defaultProgressOrder, setIsModalOpen }: TaskFormProps): JSX.Element => {
-  const [title, setTitle] = useState<string>('')
-  const [detail, setDetail] = useState<string>('')
-  const [dueDate, setDueDate] = useState<string>('')
+const TaskForm = ({
+  type,
+  defaultProgressOrder,
+  setIsModalOpen,
+  task,
+}: TaskFormProps): JSX.Element => {
+  const [title, setTitle] = useState<string>(task?.title as string)
+  const [detail, setDetail] = useState<string>(task?.detail as string)
+  const [dueDate, setDueDate] = useState<string>(task?.dueDate as string)
   const [progressOrder, setProgressOrder] = useState<number>(defaultProgressOrder)
-  const { addTask } = useTasksAction()
+  const { addTask, editTask } = useTasksAction()
+  // const isProgressCompleted = task.progressOrder === TASK_PROGRESS_ID.COMPLETED
 
   const handleSubmit = (): void => {
     if (type === TASK_MODAL_TYPE.ADD) {
       addTask(title, detail, dueDate, progressOrder)
+      setIsModalOpen(false)
+    } else if (type === TASK_MODAL_TYPE.EDIT && task) {
+      editTask(task.id, title, detail, dueDate, progressOrder) // terakhir diedit di sini, mau menambahkan properties
       setIsModalOpen(false)
     }
   }
