@@ -7,7 +7,14 @@ interface useTaskActionType {
   completeTask: (taskId: number) => void
   moveTaskCard: (taskId: number, directionNumber: 1 | -1) => void
   addTask: (title: string, detail: string, dueDate: string, progressOrder: number) => void
-  editTask: (title: string, detail: string, dueDate: string, progressOrder: number) => void
+  editTask: (
+    taskId: number,
+    title: string,
+    detail: string,
+    dueDate: string,
+    progressOrder: number,
+  ) => void
+  deleteTask: (taskId: number) => void
 }
 
 export const useTasksAction = (): useTaskActionType => {
@@ -42,21 +49,36 @@ export const useTasksAction = (): useTaskActionType => {
   }
 
   const editTask = (
+    taskId: number,
     title: string,
     detail: string,
     dueDate: string,
     progressOrder: number,
   ): void => {
     const updatedTasks: Task[] = tasks.map((task) =>
-      task.id === task.id ? { ...task, title, detail, dueDate, progressOrder } : task,
+      task.id === taskId ? { ...task, title, detail, dueDate, progressOrder } : task,
     )
     setTasks(updatedTasks)
   }
+
+  const deleteTask = (taskId: number): void => {
+    console.log('Deleting task with ID:', taskId)
+    console.log('Tasks before deletion:', tasks)
+    const removedTask = tasks.filter((task) => task.id !== taskId) // menghilangkan task dengan cara filter
+    console.log('Tasks after deletion:', removedTask)
+    setTasks(removedTask)
+  }
+
+  // const filterTask = (taskId: number, progressOrder: number): void => {
+  //   const deletedTask = tasks.filter((task) => task.id !== taskId) // filter kategori task sesuai progressOrder
+  //   setTasks(deletedTask)
+  // }
 
   return {
     completeTask,
     moveTaskCard,
     addTask,
     editTask,
+    deleteTask,
   }
 }

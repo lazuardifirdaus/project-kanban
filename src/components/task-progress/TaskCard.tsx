@@ -8,9 +8,10 @@ import { tasksState } from '@/features/taskAtoms'
 
 interface TaskCardProps {
   task: Task
+  defaultProgressOrder: number
 }
 
-const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
+const TaskCard = ({ task, defaultProgressOrder }: TaskCardProps): JSX.Element => {
   const { moveTaskCard } = useTasksAction()
   const isStarted = task.progressOrder === TASK_PROGRESS_ID.NOT_STARTED
 
@@ -59,7 +60,7 @@ const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
           </button>
         )}
       </div>
-      {isMenuOpen && <TaskMenu setIsMenuOpen={setIsMenuOpen} cardId={task.progressOrder} />}
+      {isMenuOpen && <TaskMenu setIsMenuOpen={setIsMenuOpen} menuTaskId={task.id} task={task} />}
     </div>
   )
 }

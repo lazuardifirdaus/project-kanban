@@ -45,7 +45,9 @@ const TaskListItem = ({ task }: TaskListItemProps): JSX.Element => {
         >
           more_horiz
         </span>
-        {isMenuOpen && <TaskMenu setIsMenuOpen={setIsMenuOpen} cardId={task.progressOrder} />}
+        {isMenuOpen && (
+          <TaskMenu setIsMenuOpen={setIsMenuOpen} menuTaskId={task.id} task={task}  />
+        )}
       </div>
     </div>
   )

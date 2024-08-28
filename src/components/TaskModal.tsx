@@ -4,6 +4,7 @@ import TaskForm from './TaskForm'
 import { Task } from '@/types'
 
 type TaskModalProps = {
+  task?: Task
   headingTitle: string
   type: string
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
@@ -15,6 +16,7 @@ const TaskModal = ({
   type,
   setIsModalOpen,
   defaultProgressOrder,
+  task,
 }: TaskModalProps): JSX.Element => {
   return (
     <div className="fixed top-1/4 left-[40%] p-8 border border-gray-500 w-1/4 z-10 bg-white">
@@ -33,6 +35,7 @@ const TaskModal = ({
         type={type}
         defaultProgressOrder={defaultProgressOrder}
         setIsModalOpen={setIsModalOpen}
+        task={task}
       />
     </div>
   )
